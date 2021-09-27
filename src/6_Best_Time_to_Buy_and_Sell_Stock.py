@@ -1,8 +1,5 @@
-import json
 from operator import itemgetter
 from typing import List
-
-from src.utils import timeit
 
 
 class Solution:
@@ -27,15 +24,25 @@ class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         max_profit = 0
         sorted_prices_with_index = sorted(enumerate(prices), key=itemgetter(1))
+
         for index, buy_price in sorted_prices_with_index:
             if index == len(prices) - 1:
                 continue
-            sell_price = max(prices[index+1:])
 
+            sell_price = next(
+                sell_price
+                for r_index, sell_price in reversed(sorted_prices_with_index)
+                if r_index > index
+            )
             max_profit = max(max_profit, sell_price - buy_price)
 
         return max_profit
 
+
 if __name__ == '__main__':
-    with open("../data/6.json") as numbers_file:
+    from src.utils import timeit
+    import json
+
+    # 0:00:00.133508
+    with open("../data/6_1.json") as numbers_file:
         timeit(Solution().maxProfit, json.load(numbers_file))

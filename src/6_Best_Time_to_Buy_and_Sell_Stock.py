@@ -1,5 +1,8 @@
-from itertools import combinations
+import json
+from operator import itemgetter
 from typing import List
+
+from src.utils import timeit
 
 
 class Solution:
@@ -13,9 +16,26 @@ class Solution:
     >>> prices = [1]
     >>> Solution().maxProfit(prices)
     0
+    >>> prices = [3,3]
+    >>> Solution().maxProfit(prices)
+    0
+    >>> prices = [2,1,2,0,1]
+    >>> Solution().maxProfit(prices)
+    1
     """
 
     def maxProfit(self, prices: List[int]) -> int:
-        if len(prices) == 1:
-            return 0
-        return max(0, max((c2 - c1 for c1, c2 in combinations(prices, 2))))
+        max_profit = 0
+        sorted_prices_with_index = sorted(enumerate(prices), key=itemgetter(1))
+        for index, buy_price in sorted_prices_with_index:
+            if index == len(prices) - 1:
+                continue
+            sell_price = max(prices[index+1:])
+
+            max_profit = max(max_profit, sell_price - buy_price)
+
+        return max_profit
+
+if __name__ == '__main__':
+    with open("../data/6.json") as numbers_file:
+        timeit(Solution().maxProfit, json.load(numbers_file))

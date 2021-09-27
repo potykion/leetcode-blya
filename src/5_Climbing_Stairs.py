@@ -1,3 +1,6 @@
+import datetime
+
+
 class Solution:
     """
     >>> s = Solution()
@@ -29,3 +32,17 @@ class Solution:
                 return cache.setdefault(n_, _gen(n_ - 1) + _gen(n_ - 2))
 
         return _gen(n)
+
+#
+# def timeit(f, *args):
+#     start = datetime.datetime.now()
+#     f(*args)
+#     print(datetime.datetime.now() - start)
+#
+#
+# if __name__ == '__main__':
+#     s = Solution()
+#     # 0:00:01.912120
+#     # 0:00:01.938700
+#     # 0:00:01.965709
+#     timeit(s.climbStairs, 35)

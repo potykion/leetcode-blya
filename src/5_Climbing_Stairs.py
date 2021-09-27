@@ -15,11 +15,17 @@ class Solution:
     13
     >>> s.climbStairs(35)
     14930352
+    >>> s.climbStairs(38)
+    63245986
     """
 
     def climbStairs(self, n: int) -> int:
-        if n == 1:
-            return 1
-        if n == 2:
-            return 2
-        return self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        cache = {1: 1, 2: 2}
+
+        def _gen(n_):
+            if n_ in cache:
+                return cache[n_]
+            else:
+                return cache.setdefault(n_, _gen(n_ - 1) + _gen(n_ - 2))
+
+        return _gen(n)

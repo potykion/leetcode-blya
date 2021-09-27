@@ -1,6 +1,8 @@
 class Solution:
     """
     >>> s = Solution()
+    >>> s.climbStairs(1)
+    1
     >>> s.climbStairs(2)
     2
     >>> s.climbStairs(3)
@@ -9,23 +11,15 @@ class Solution:
     5
     >>> s.climbStairs(5)
     8
+    >>> s.climbStairs(6)
+    13
+    >>> s.climbStairs(35)
+    14930352
     """
 
     def climbStairs(self, n: int) -> int:
         if n == 1:
             return 1
-
-        def get_way(way, n):
-            way_sum = sum(way)
-
-            if way_sum > n:
-                return
-
-            if way_sum == n:
-                yield way
-                return
-
-            yield from get_way(way + [1], n)
-            yield from get_way(way + [2], n)
-
-        return len([*get_way([1], n), *get_way([2], n)])
+        if n == 2:
+            return 2
+        return self.climbStairs(n - 1) + self.climbStairs(n - 2)

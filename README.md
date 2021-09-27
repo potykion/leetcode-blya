@@ -1,4 +1,4 @@
-# Leetcode-blya
+# leetcode-blya
 
 Дрочим литкод
 

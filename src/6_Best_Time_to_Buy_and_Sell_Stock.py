@@ -3,6 +3,8 @@ from typing import List
 
 class Solution:
     """
+    https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
     >>> prices = [7,1,5,3,6,4]
     >>> Solution().maxProfit(prices)
     5

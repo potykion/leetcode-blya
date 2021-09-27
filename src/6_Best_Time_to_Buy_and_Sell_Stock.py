@@ -1,4 +1,3 @@
-from operator import itemgetter
 from typing import List
 
 
@@ -22,27 +21,33 @@ class Solution:
     """
 
     def maxProfit(self, prices: List[int]) -> int:
+        def _step(prices):
+            min_buy_price = 999_999
+            min_buy_price_index = -1
+            for index, price in enumerate(prices):
+                if price < min_buy_price:
+                    min_buy_price = price
+                    min_buy_price_index = index
+
+            return min_buy_price, min_buy_price_index
+
         max_profit = 0
-        sorted_prices_with_index = sorted(enumerate(prices), key=itemgetter(1))
 
-        for index, buy_price in sorted_prices_with_index:
-            if index == len(prices) - 1:
-                continue
-
-            sell_price = next(
-                sell_price
-                for r_index, sell_price in reversed(sorted_prices_with_index)
-                if r_index > index
-            )
-            max_profit = max(max_profit, sell_price - buy_price)
+        while True:
+            if not prices:
+                break
+            min_buy_price, min_buy_price_index = _step(prices)
+            max_profit = max(max_profit, max(prices[min_buy_price_index + 1:], default=0) - min_buy_price)
+            prices = prices[:min_buy_price_index]
 
         return max_profit
 
 
-if __name__ == '__main__':
-    from src.utils import timeit
-    import json
-
-    # 0:00:00.133508
-    with open("../data/6_1.json") as numbers_file:
-        timeit(Solution().maxProfit, json.load(numbers_file))
+# if __name__ == '__main__':
+#     from src.utils import timeit
+#     import json
+#
+#     # 0:00:00.133508
+#     # 0:00:00.015624
+#     with open("../data/6_1.json") as numbers_file:
+#         timeit(Solution().maxProfit, json.load(numbers_file))

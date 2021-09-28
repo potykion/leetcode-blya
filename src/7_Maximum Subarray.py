@@ -39,9 +39,7 @@ class Solution:
 
     def maxSubArray(self, nums: List[int]) -> int:
         max_sum = sum(nums)
-
         result = nums
-
         while True:
             deque_ = deque(result)
             buffer = []
@@ -79,6 +77,15 @@ class Solution:
                 result = new_result
 
         return max(filter(None, [max_sum, sum(result), max(nums)]), default=0)
+
+        # # https://www.youtube.com/watch?v=vDlxW-_QEpI&list=PLyHj6yBbnkUgC6T9RpPxEBUv3My9lPd7m&index=8
+        # max_sum = cur_sum = nums[0]
+        #
+        # for num in nums[1:]:
+        #     cur_sum = max(cur_sum + num, num)
+        #     max_sum = max(cur_sum, max_sum)
+        #
+        # return max_sum
 
 # if __name__ == '__main__':
 #     from src.utils import timeit

@@ -18,4 +18,14 @@ class Solution:
     """
 
     def singleNumber(self, nums: List[int]) -> int:
-        return next((i for i, times in Counter(nums).items() if times == 1))
+        # https://www.youtube.com/watch?v=05MUgnQV_J8&list=PLyHj6yBbnkUgC6T9RpPxEBUv3My9lPd7m&index=5
+        # mask = 0
+        # for num in nums:
+        #     mask ^= num
+        # return mask
+
+        return next((
+            i
+            for i, times in Counter(nums).items()
+            if times == 1
+        ))

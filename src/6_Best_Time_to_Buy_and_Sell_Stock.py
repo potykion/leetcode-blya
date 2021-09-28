@@ -39,11 +39,20 @@ class Solution:
             if not prices:
                 break
             min_buy_price, min_buy_price_index = _step(prices)
-            max_profit = max(max_profit, max(prices[min_buy_price_index + 1:], default=0) - min_buy_price)
+            max_profit = max(
+                max_profit,
+                max(prices[min_buy_price_index + 1:], default=0) - min_buy_price
+            )
             prices = prices[:min_buy_price_index]
 
-        return max_profit
+        # https://www.youtube.com/watch?v=XMwrYa7LBe0&list=PLyHj6yBbnkUgC6T9RpPxEBUv3My9lPd7m&index=7
+        # max_profit = 0
+        # cur_min = prices[0]
+        # for price in prices[1:]:
+        #     max_profit = max(max_profit, price - cur_min)
+        #     cur_min = min(cur_min, price)
 
+        return max_profit
 
 # if __name__ == '__main__':
 #     from src.utils import timeit

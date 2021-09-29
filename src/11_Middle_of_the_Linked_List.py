@@ -9,6 +9,9 @@ class ListNode:
 
 
 class Solution:
+    """
+    https://leetcode.com/problems/middle-of-the-linked-list/submissions/
+    """
     # def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
     #     nodes = []
     #
